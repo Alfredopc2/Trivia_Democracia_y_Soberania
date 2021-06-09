@@ -1,0 +1,54 @@
+import time
+import random
+from preguntas import trivia
+
+def verificar_respuesta(pregunta, resp, intentos, puntuacion):
+    if trivia[pregunta]['respuesta'].lower() == resp.lower():
+        return True
+    else:
+        return False
+
+print('¡Hola!, en este juego vas a contestar una trivia de historia sobre presidentes,\ndesde Álvaro Obregón hasta Andrés Manuel López Obrador, que consta de 48 preguntas!!!')
+time.sleep(2)
+print('Cada pregunta vale 1 punto y la calificacion más alta, obviamente es de 48.')
+print('Necesitas mínimo 24 aciertos para una increíble sorpresa!!!!!')
+time.sleep(2)
+miNombre = input("Para empezar a jugar, ingresa tu nombre: ")
+print('Muy bien, ' + miNombre + ', nombre curioso...')
+time.sleep(2)
+print('Espero que estés listo, por aquí vienen las preguntas!!!\n')
+time.sleep(1.5)
+
+puntuacion = 0
+for pregunta in trivia:
+    intentos = 1
+    while intentos > 0:
+        print(trivia[pregunta]['pregunta'])
+        respuesta = input("Escribe la respuesta: ")
+        verificar = verificar_respuesta(pregunta, respuesta, intentos, puntuacion)
+        if verificar:
+            puntuacion += 1
+            break
+        intentos -= 1
+    print("\nSiguiente pregunta...\n")
+
+final_feliz = random.randint(1,3)
+final_malo = random.randint(1,3)
+
+print(f"¡Tu puntuación final es de {puntuacion}!\n")
+if puntuacion >= 24:
+    if final_feliz == 1:
+        print("FELICIDADES!!!!!!!! \nLograste pasar la trivia!!! \nAMLO te regalará una beca!!!!")
+    elif final_feliz == 2:
+        print("FELICIDADES!!!!!!!! \nPasaste exitosamene la trivia!!!!!!!!!!! \nY además te encontraste un tesoro enterrado en el jardín de tu casa!!!!!")
+    elif final_feliz == 3:
+        print("FELICIDADES!!!!!!!! \nAprobaste la trivia!!!!!!!!!! \nEl maestro Francisco logró viajar en el tiempo y cambiar su voto!!!!")
+else:
+    if final_malo== 1:
+        print("PERDISTE!!!!! :( \nLos municipales te agarraron y te balearon... \n:(\n")
+    elif final_malo == 2:
+        print("PERDISTE!!!!! :( \nTe suicidaste con 3 escopetazos en la espalda...\nMala suerte!! Ya te tocaba!\n")
+    elif final_malo == 3:
+        print("PERDISTE!!!!! :( \nAhora no serás elegido para la beca Benito Juárez...\nSuerte para la próxima!\n")
+
+input("Presiona ENTER para salir")
